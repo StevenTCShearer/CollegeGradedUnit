@@ -1,0 +1,157 @@
+﻿@using System.Globalization
+@model ValueFurniture.Models.OrderAndOrderDetailViewModel
+
+@{
+    ViewBag.Title = "Details";
+    CultureInfo uk = new CultureInfo("en-GB");
+
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentOrder.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentOrder.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentOrder.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentOrder.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentOrder.OrderDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentOrder.OrderDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentOrder.Line1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentOrder.Line1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentOrder.Line2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentOrder.Line2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentOrder.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentOrder.City)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentOrder.PostalCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentOrder.PostalCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentOrder.Country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentOrder.Country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentOrder.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentOrder.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentOrder.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentOrder.Email)
+        </dd>
+
+    </dl>
+</div>
+
+<div>
+    <h4>Products</h4>
+    <hr />
+    <table class="table">
+        <tr>
+            <th>
+                Product Name
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Cost
+            </th>
+
+        </tr>
+        @foreach (var item in Model.OrderCollection)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Cost)
+                </td>
+            </tr>
+        }
+
+        <tr>
+            <td></td>
+            <td></td>
+            <th>Total Cost:</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                @Html.DisplayFor(model => model.CurrentOrder.OrderTotal)
+            </td>
+        </tr>
+    </table>
+</div>
+
+<p>
+    @if (User.IsInRole("Adminsitrator"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.CurrentOrder.OrderId }) 
+        @Html.ActionLink("Back to List", "Index")
+    }
+    @if (!User.IsInRole("Administrator"))
+    {
+        @Html.ActionLink("Back to List", "MyOrders")
+    }
+</p>

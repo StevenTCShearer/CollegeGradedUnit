@@ -1,0 +1,30 @@
+﻿@model IEnumerable<ValueFurniture.Models.ProductListViewModel>
+
+<div id="productsList">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+                <img src=@item.ProductPictureURL alt=@item.ProductName>
+                <div class="caption">
+                    <h4 class="pull-right">£@item.ProductPrice</h4>
+                    <h4>
+                        <a href="~/Products/Details/@item.ProductId">@item.ProductName</a>
+                    </h4>
+                    <p>@item.ProductDetails</p>
+                    @if (item.ProductQuantity > 0)
+                    {
+                        <p class="button">
+                            @Html.ActionLink("Add to cart", "AddToCart",
+        "ShoppingCart", new { id = @item.ProductId }, "")
+                        </p>
+                    }
+                    @if (item.ProductQuantity < 1)
+                    {
+                        <p>Out of Stock</p>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

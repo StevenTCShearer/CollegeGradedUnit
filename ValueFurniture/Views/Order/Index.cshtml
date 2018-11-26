@@ -1,0 +1,123 @@
+﻿@using System.Globalization
+@model IEnumerable<ValueFurniture.POCO_Classes.Order>
+
+@{
+    ViewBag.Title = "Index";
+    CultureInfo uk = new CultureInfo("en-GB");
+}
+
+<h1>Orders</h1>
+
+<div>
+    @using (Ajax.BeginForm(
+                                                                                    new AjaxOptions
+                                                                                    {
+                                                                                        HttpMethod = "get",
+                                                                                        InsertionMode = InsertionMode.Replace,
+                                                                                        UpdateTargetId = "orderList"
+                                                                                    }))
+    {
+        <input type="search" name="user" />
+        <input type="submit" value="Search By Name" />
+        <input type="button" value="Reset" onclick="location.href='@Url.Action("Index", "Order")'" />    
+    }
+</div>
+<br />
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            Order Id
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Line1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Line2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PostalCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            Order Cost
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Line1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Line2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostalCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderTotal)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.OrderId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.OrderId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.OrderId }) |
+
+                @if (item.OrderDate > DateTime.Now.AddDays(-2))
+                {
+                    @Html.ActionLink("Cancel Order", "Cancel", new { id = item.OrderId });
+                }
+
+            </td>
+        </tr>
+    }
+</table>
+
+<br />
+<p>
+    @Html.ActionLink("Create New", "Create")
+    <br />
+    <input type="button" value="Export To Excel" onclick="location.href='@Url.Action("ExportToExcel", "Order")'" />
+    <input type="button" value="Export To PDF" onclick="location.href='@Url.Action("ExportToPDF", "Order")'" />
+</p>

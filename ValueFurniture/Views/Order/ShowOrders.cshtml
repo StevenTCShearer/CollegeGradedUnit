@@ -1,0 +1,94 @@
+﻿@using System.Globalization
+@model IList<ValueFurniture.Models.OrderViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    CultureInfo uk = new CultureInfo("en-GB");
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Order Id
+        </th>
+        <th>
+            Customer Id
+        </th>
+        <th>
+            First Name
+        </th>
+        <th>
+            Last Name
+        </th>
+        <th>
+            Line 1
+        </th>
+        <th>
+            Line 2
+        </th>
+        <th>
+            City
+        </th>
+        <th>
+            Post Code
+        </th>
+        <th>
+            Country
+        </th>
+        <th>
+            Phone
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Date Placed
+        </th>
+        <th>
+            Total Cost
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(m => item.OrderId)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.CustomerId)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Line1)
+            <td>
+                @Html.DisplayFor(m => item.Line2)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.PostalCode)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.OrderTotal)
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,13 @@
+﻿@model IEnumerable<ValueFurniture.POCO_Classes.Category>
+
+<div id="categories">
+    <div class="col-md-3">
+        <div class="list-group">
+            <a href="~/Home/HideUnavailableProducts" class="list-group-item">Hide Items Out of Stock</a>
+            @foreach (var category in Model)
+            {
+                <a href="~/Home/Browse?category=@category.CategoryName" class="list-group-item">@category.CategoryName</a>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+﻿@model ValueFurniture.Models.ProductCategoryViewModel
+
+@{
+    ViewBag.Title = "Browse Categories";
+}
+
+<div class="row">
+    @{Html.RenderAction("CategoryMenu", "Home");}
+    <div class="col-md-9">
+        <div class="row" />
+        <h3><em>@Model.Category.CategoryName</em></h3>
+    </div>
+    <div class="row">
+        @Html.Partial("_Products", Model.Products)
+    </div>
+</div>
+
+

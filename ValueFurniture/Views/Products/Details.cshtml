@@ -1,0 +1,47 @@
+﻿@model IEnumerable<ValueFurniture.Models.ProductListViewModel>
+
+<div class="container">
+    @foreach (var item in Model)
+    {
+        <div class="row">
+
+            <div class="col-md-9">
+
+                <div class="thumbnail">
+                    <img class="img-responsive" src=@item.ProductPictureURL alt=@item.ProductName>
+                    <div class="caption-full">
+                        <h4 class="pull-right">£@item.ProductPrice</h4>
+                        <h4>
+                            <a href="#">@item.ProductName</a>
+                        </h4>
+                        <p>@item.ProductDetails</p>
+                        <p>
+                            <a href="~/Home/Browse?category=@item.Category.CategoryName"> @item.Category.CategoryName</a>
+                        </p>
+
+                        @if (item.ProductQuantity > 0)
+                        {
+                            <p>
+                                @item.ProductQuantity currently in stock
+                            </p>
+                            <p class="button">
+                                @Html.ActionLink("Add to cart", "AddToCart",
+             "ShoppingCart", new { id = @item.ProductId }, "")
+                            </p>
+                        }
+                        else
+                        {
+                            <p>Out of Stock</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>

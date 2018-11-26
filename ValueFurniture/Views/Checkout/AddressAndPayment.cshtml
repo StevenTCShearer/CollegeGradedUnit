@@ -1,0 +1,35 @@
+﻿@model ValueFurniture.POCO_Classes.Order
+
+@{
+    ViewBag.Title = "Address And Payment";
+    var currentUser = ViewBag.CurrentUser;
+}
+
+@using (Html.BeginForm())
+{
+    <div class="weird">
+        <fieldset>
+            <legend>Shipping Information</legend>
+            @Html.EditorForModel()
+
+            @if (currentUser.PhoneNumber == null)
+            {
+                <p><b>Phone Number</b></p>
+                @Html.EditorFor(c => c.Phone)
+                @Html.ValidationMessageFor(c => c.Phone, "Phone Number is required")
+            }
+        </fieldset>
+        <fieldset>
+            <legend>Payment</legend>
+        </fieldset>
+        <input type="submit" value="Submit Order" />
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

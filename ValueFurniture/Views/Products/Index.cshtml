@@ -1,0 +1,84 @@
+﻿@model IEnumerable<ValueFurniture.POCO_Classes.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Products</h2>
+<div>
+    @using (Ajax.BeginForm(
+                                                                                                        new AjaxOptions
+                                                                                                        {
+                                                                                                            HttpMethod = "get",
+                                                                                                            InsertionMode = InsertionMode.Replace,
+                                                                                                            UpdateTargetId = "productList"
+                                                                                                        }))
+    {
+        <input type="search" name="name" />
+        <input type="submit" value="Search By Name" />
+        <input type="button" value="Reset" onclick="location.href='@Url.Action("Index", "Products")'" />
+    }
+</div>
+<br />
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.CategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductDetails)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductPictureURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductQuantity)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductDetails)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductPictureURL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductQuantity)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
+            </td>
+        </tr>
+    }
+</table>
+
+<br />
+<p>
+    @Html.ActionLink("Create New", "Create")
+    <br />
+    <input type="button" value="Export To Excel" onclick="location.href='@Url.Action("ExportToExcel", "Products")'" />
+    <input type="button" value="Export To PDF" onclick="location.href='@Url.Action("ExportToPDF", "Products")'" />
+</p>
